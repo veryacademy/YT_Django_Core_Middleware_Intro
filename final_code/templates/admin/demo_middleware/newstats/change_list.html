@@ -1,0 +1,62 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+
+
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.1/Chart.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const ctx = document.getElementById('myChart').getContext('2d');
+
+  const chartData = {{ stat_data | safe }};
+
+  let arr = []
+
+  for (let value of Object.values(chartData[0])) {
+    arr.push(value); 
+  }
+
+  // Render the chart
+  const chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Windows', 'Mac', 'Iphone', 'Android', 'Other'],
+      datasets: [{
+            label: '# of Visits',
+            data: arr,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+    }
+},
+  });
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Render our chart -->
+<div style="width: 100%;">
+  <canvas style="margin-bottom: 30px; width: 60%; height: 50%;" id="myChart"></canvas>
+</div>
+<!-- Render the rest of the ChangeList view -->
+{{ block.super }}
+{% endblock %}
