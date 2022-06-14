@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bank',
-    'demo_middleware'
+    #'demo_middleware'
 ]
 
 MIDDLEWARE = [
@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'demo_middleware.middleware.DemoMiddleware'
+    #'demo_middleware.middleware.DemoMiddleware'
 ]
 
 ROOT_URLCONF = 'core.urls'
